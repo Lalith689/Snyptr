@@ -1,0 +1,48 @@
+# Virtual Environments
+venv/
+venv310/
+.venv/
+env/
+ENV/
+
+# Large Model Files (exceeds GitHub size limits)
+*.h5
+*.pkl
+*.pth
+*.pt
+*.model
+
+# Node modules
+node_modules/
+frontend/node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+*.pyc
+__pycache__/
+.pytest_cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+secret.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log

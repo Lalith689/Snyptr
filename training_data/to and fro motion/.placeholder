@@ -1,0 +1,5 @@
+Add your training images into this folder. Accepted formats: .jpg .jpeg .png
+
+When you add images, run `python train.py` (or `python main.py`) to include this class automatically.
+
+If you prefer a folder name without spaces, create `to_and_fro_motion` instead.
