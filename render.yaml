@@ -2,7 +2,7 @@ services:
   - type: web
     name: snyptr-backend
     runtime: python
-    runtimeVersion: 3.10.13
+    runtimeVersion: 3.11.7
     buildCommand: pip install -r requirements.txt
     startCommand: cd backend && gunicorn server:app
     envVars:
