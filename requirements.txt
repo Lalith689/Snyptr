@@ -1,13 +1,13 @@
 # Build tools
-setuptools>=65.0
 wheel
+setuptools
 
-# Python 3.9+ compatible packages with prebuilt wheels
-numpy>=1.23.0,<2.0
-tensorflow>=2.12.0
-Pillow>=9.0.0
-scikit-learn>=1.2.0
-Flask>=2.3.0
-opencv-python>=4.7.0
-flask-cors>=4.0.0
-gunicorn>=20.1.0
+# Python 3.9 compatible packages  
+numpy==1.23.5
+tensorflow==2.13.0
+Pillow==9.5.0
+scikit-learn==1.2.2
+Flask==2.3.2
+opencv-python==4.8.0.76
+flask-cors==4.0.0
+gunicorn==20.1.0
