@@ -9,9 +9,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend code
 COPY . .
 
-# Copy model files from parent directory
-COPY ../best_model.h5 .
-COPY ../stance_error_model.h5 .
+# Copy model files (now available in git via LFS)
+COPY best_model.h5 .
+COPY stance_error_model.h5 .
 
 # Set Flask environment
 ENV FLASK_ENV=production
