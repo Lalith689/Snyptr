@@ -5,8 +5,7 @@ venv310/
 env/
 ENV/
 
-# Large Model Files (exceeds GitHub size limits)
-*.h5
+# Large Model Files (using Git LFS for .h5 files)
 *.pkl
 *.pth
 *.pt
