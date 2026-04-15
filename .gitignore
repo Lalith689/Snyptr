@@ -6,6 +6,7 @@ env/
 ENV/
 
 # Large Model Files (using Git LFS for .h5 files)
+*.h5
 *.pkl
 *.pth
 *.pt

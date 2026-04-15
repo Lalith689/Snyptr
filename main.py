@@ -7,6 +7,7 @@ from PIL import Image
 import shutil
 from sklearn.model_selection import train_test_split
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import tempfile
 import traceback
 
@@ -303,6 +304,7 @@ def main():
 
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/api/analyze', methods=['POST'])
 def analyze():
@@ -319,16 +321,15 @@ def analyze():
         model = load_model('best_model.h5')
         category, confidence, is_uncertain = predict_error(model, image_path)
 
-        # Fill description/solution even if uncertain
-        info = ERROR_CATEGORIES_INFO.get(category, None)
-        description = info['description'] if info else 'No specific description available.'
-        solution = info['solution'] if info else 'No specific solution available.'
-
+        # Return format matching frontend expectations
         result = {
-            'category': f"{category}{' (Uncertain)' if is_uncertain else ''}",
-            'confidence': float(confidence) if confidence is not None else 0.0,
-            'description': description,
-            'solution': solution
+            'stance_score': float(confidence) if confidence is not None else 0.0,
+            'error_predictions': [
+                {
+                    'error_type': category,
+                    'confidence': float(confidence) if confidence is not None else 0.0
+                }
+            ]
         }
         return jsonify(result)
     except Exception as e:
