@@ -1,4 +1,4 @@
-# SNYPTR - AI-Based Shooting Form Analysis System
+# SNYPTR - AI-Based Shooting Error Analysis System
 
 ## 📋 Abstract
 
