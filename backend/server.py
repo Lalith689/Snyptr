@@ -80,10 +80,19 @@ def analyze_image():
         if best_model and stance_model:
             # Use real models
             image_array_exp = np.expand_dims(image_array, axis=0)
-            stance_pred = stance_model.predict(image_array_exp, verbose=0)
-            error_pred = best_model.predict(image_array_exp, verbose=0)
-            stance_score = float(stance_pred[0][0])
-            error_predictions = error_pred[0]
+            try:
+                stance_pred = stance_model.predict(image_array_exp, verbose=0)
+                error_pred = best_model.predict(image_array_exp, verbose=0)
+                # Safely extract scalar from stance prediction (handles different output shapes)
+                stance_pred_flat = np.asarray(stance_pred).flatten()
+                stance_score = float(stance_pred_flat[0]) if len(stance_pred_flat) > 0 else 0.75
+                # Extract error predictions (handles both 1D and 2D arrays)
+                error_predictions = np.asarray(error_pred).flatten() if np.asarray(error_pred).ndim > 1 else np.asarray(error_pred)
+            except Exception as pred_err:
+                print(f"Error during prediction: {pred_err}")
+                print(f"Stance pred type: {type(stance_pred)}, shape: {getattr(stance_pred, 'shape', 'N/A')}")
+                print(f"Error pred type: {type(error_pred)}, shape: {getattr(error_pred, 'shape', 'N/A')}")
+                raise
         else:
             # Use mock predictions if models not loaded
             print("Using mock predictions (models not available)")
@@ -91,13 +100,18 @@ def analyze_image():
             error_predictions = np.random.dirichlet(np.ones(len(error_classes)))
 
         # Get top 3 predictions for error types
-        top_3_indices = np.argsort(error_predictions)[-3:][::-1]
+        # Ensure we only access indices that exist in error_classes
+        valid_indices = np.arange(min(len(error_predictions), len(error_classes)))
+        if len(valid_indices) == 0:
+            return jsonify({"error": "No valid predictions generated"}), 500
+        
+        top_indices = valid_indices[np.argsort(error_predictions[:len(valid_indices)])[-3:][::-1]]
         top_3_errors = [
             {
                 "error_type": error_classes[int(idx)],
                 "confidence": float(error_predictions[int(idx)])
             }
-            for idx in top_3_indices
+            for idx in top_indices
         ]
 
         return jsonify({

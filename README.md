@@ -273,6 +273,7 @@ See [DEPLOYMENT_LIVE.md](DEPLOYMENT_LIVE.md) for detailed instructions.
 - [API Documentation](docs/API.md) - Complete API reference
 - [Architecture](docs/ARCHITECTURE.md) - System design details
 - [Training Guide](docs/TRAINING.md) - How to retrain the model
+- [Ablation Study Guide](docs/ABLATION_STUDY.md) - Compare model design choices and metric impact
 
 ---
 
@@ -288,6 +289,9 @@ python main.py
 # 3. Follow prompts to upload images
 
 # 4. Model saves to best_model.h5
+
+# 5. Run ablation study (optional)
+python ablation_study.py --data-dir training_data --output-dir results/ablation
 ```
 
 ---
