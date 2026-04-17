@@ -1,0 +1,26 @@
+{
+  "seed": 42,
+  "data_dir": "training_data",
+  "output_dir": "results\\ablation",
+  "epochs": 12,
+  "batch_size": 32,
+  "image_size": 224,
+  "test_size": 0.2,
+  "val_size": 0.2,
+  "selected_variants": [
+    "baseline",
+    "no_dropout",
+    "no_augmentation",
+    "shallow_cnn",
+    "sgd_optimizer"
+  ],
+  "class_names": [
+    "acute_angle_trigger",
+    "breath_control",
+    "early_recoil",
+    "frontsight_dip",
+    "overtight_grip",
+    "stance_position",
+    "to and fro motion"
+  ]
+}
